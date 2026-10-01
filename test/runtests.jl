@@ -20,6 +20,14 @@ first_arrival(x; frac = 0.01) = findfirst(>(frac * maximum(x)), x)
         @test_throws ArgumentError tool(:not_a_tool)
     end
 
+    @testset "citation" begin
+        txt = sprint(citation)
+        @test occursin("10.1007/s00024-010-0161-6", txt)
+        @test occursin("github.com/SCECcode/cybershake-core", txt)
+        @test occursin("EAR-1600087", txt)
+        @test occursin("10.1007/s00024-010-0161-6", read(joinpath(pkgdir(CyberShake), "CITATION.bib"), String))
+    end
+
     @testset "executables start" begin
         # Without arguments every tool prints a usage message or a complaint about missing
         # parameters and exits with a small status; a missing library or a crash would show

@@ -92,8 +92,44 @@ caught), identical when run on 1, 2 and 4 MPI ranks, and that `reformat_awp_sgt`
 GitHub Actions (`.github/workflows/CI.yml`) runs them on Linux (x86_64), macOS (Intel) and macOS (Apple silicon)
 with Julia 1.11 and the latest release.
 
+## Credits and how to cite
+
+**CyberShake.jl only provides a Julia interface. All the science is done by the CyberShake software of the
+[Southern California Earthquake Center (SCEC)](https://scec.org)**, <https://github.com/SCECcode/cybershake-core>
+(BSD 3-Clause license, Copyright (c) 2022, Southern California Earthquake Center). See the
+[CyberShake wiki](https://github.com/SCECcode/cybershake-core/wiki) for its documentation and
+[CyberShake study descriptions](https://strike.scec.org/scecpedia/Comparison_of_CyberShake_Studies) for the datasets.
+This package uses the version tagged `study_24_8`.
+
+The CyberShake authors ask users to cite the CyberShake paper (their words: "Cite Code As" and "Primary Reference"):
+
+> Graves, R., Jordan, T.H., Callaghan, S. et al. CyberShake: A Physics-Based Seismic Hazard Model for
+> Southern California. *Pure Appl. Geophys.* 168, 367–381 (2011; first published online 2010).
+> <https://doi.org/10.1007/s00024-010-0161-6>, SCEC Contribution 1354.
+
+suggested text for the body of your paper,
+
+> The research described in this article used CyberShake software (Graves et al., 2011) published under the BSD-3 license.
+
+and this acknowledgement:
+
+> We would like to acknowledge use of the CyberShake software provided by the Southern California Earthquake Center
+> (http://scec.org) which is funded by NSF Cooperative Agreement EAR-1600087 and USGS Cooperative Agreement G17AC00047.
+
+`CyberShake.citation()` prints this text, and [`CITATION.bib`](CITATION.bib) / [`CITATION.cff`](CITATION.cff) contain
+machine-readable versions.
+
+**Authors of the CyberShake software** (from the upstream [CREDITS.md](https://github.com/SCECcode/cybershake-core/blob/main/CREDITS.md)):
+Scott Callaghan, Kevin Milner, Robert Graves, Kim Olsen, Philip Maechling, Fabio Silva, Thomas H. Jordan,
+Christine Goulet, Karan Vahi, Patrick Small, Matt Rynge, Ewa Deelman and Hunter Francoeur. The AWP-ODC solver `pmcl3d` goes back
+to C. Marcinkovich and K.B. Olsen (2004), with major contributions from Y.F. Cui and many others, as listed in the
+header of its source file `AWP-ODC-SGT/src/pmcl3d.f`. The command-line parser `libget` that the tools link
+statically is Copyright 1990 Science Applications International Corporation.
+
 ## Licenses
 
-This package is MIT licensed. The CyberShake codes are distributed under the BSD 3-clause license by the
-Southern California Earthquake Center; please cite Graves et al. (2011),
-[doi:10.1007/s00024-010-0161-6](https://doi.org/10.1007/s00024-010-0161-6) when you use them.
+This Julia package is MIT licensed. The CyberShake executables in `CyberShake_jll` are built unmodified from
+cybershake-core (BSD 3-Clause, see above; the license text is installed with the JLL in `share/licenses/CyberShake`),
+apart from a one-line patch that removes an assignment to an unallocated array in `pmcl3d.f` which crashes
+with gfortran. The JLL is built with [BinaryBuilder](https://binarybuilder.org) from the
+[Yggdrasil](https://github.com/JuliaPackaging/Yggdrasil) recipe `C/CyberShake`.
