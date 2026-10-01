@@ -1,5 +1,7 @@
 # CyberShake.jl
 
+[![CI](https://github.com/boriskaus/CyberShake.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/boriskaus/CyberShake.jl/actions/workflows/CI.yml)
+
 Run the wave-propagation codes of the SCEC [CyberShake](https://github.com/SCECcode/cybershake-core)
 platform from Julia, on Linux and macOS, without compiling anything.
 
